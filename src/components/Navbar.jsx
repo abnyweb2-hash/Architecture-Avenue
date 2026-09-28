@@ -40,7 +40,7 @@ export default function Navbar({ onOpenTenders, onOpenConsultation }) {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
           ? 'glass-nav py-3.5 shadow-md shadow-[#2A2A2A]/5'
-          : 'bg-gradient-to-b from-[#E1DDD4]/95 via-[#E1DDD4]/80 to-transparent py-5'
+          : 'bg-gradient-to-b from-[#0D0D0D]/90 via-[#0D0D0D]/50 to-transparent py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -52,10 +52,16 @@ export default function Navbar({ onOpenTenders, onOpenConsultation }) {
             className="flex items-center space-x-3.5 group cursor-pointer focus:outline-none flex-shrink-0"
           >
             {/* Minimalist Monogram Box [A|A] */}
-            <div className="relative w-9 h-9 border border-[#2A2A2A]/20 rounded-lg flex items-center justify-center bg-[#F2F0EC] group-hover:border-[#D8A56E] group-hover:shadow-[0_0_15px_rgba(216,165,110,0.3)] transition-all duration-300">
+            <div className={`relative w-9 h-9 border rounded-lg flex items-center justify-center transition-all duration-300 ${
+              isScrolled
+                ? 'border-[#2A2A2A]/20 bg-[#F2F0EC] group-hover:border-[#D8A56E] group-hover:shadow-[0_0_15px_rgba(216,165,110,0.3)]'
+                : 'border-white/15 bg-white/5 group-hover:border-[#D8A56E] group-hover:shadow-[0_0_15px_rgba(216,165,110,0.3)]'
+            }`}>
               <svg
                 viewBox="0 0 40 40"
-                className="w-5 h-5 text-[#2A2A2A] group-hover:text-[#D8A56E] transition-colors"
+                className={`w-5 h-5 transition-colors ${
+                  isScrolled ? 'text-[#2A2A2A] group-hover:text-[#D8A56E]' : 'text-white group-hover:text-[#D8A56E]'
+                }`}
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2.2"
@@ -68,7 +74,9 @@ export default function Navbar({ onOpenTenders, onOpenConsultation }) {
             </div>
 
             <div className="flex flex-col text-left">
-              <span className="font-monumental tracking-[0.22em] text-[#2A2A2A] text-sm sm:text-base font-bold uppercase">
+              <span className={`font-monumental tracking-[0.22em] text-sm sm:text-base font-bold uppercase transition-colors ${
+                isScrolled ? 'text-[#2A2A2A]' : 'text-white'
+              }`}>
                 ARCHITECT&apos;S
               </span>
               <span className="text-[10px] tracking-[0.35em] text-[#D8A56E] font-bold uppercase">
@@ -87,13 +95,21 @@ export default function Navbar({ onOpenTenders, onOpenConsultation }) {
             >
               <button
                 className={`flex items-center space-x-1.5 text-xs font-semibold tracking-[0.2em] uppercase transition-colors py-2 ${
-                  activeMegaMenu === 'works' ? 'text-[#D8A56E]' : 'text-[#2A2A2A] hover:text-[#BD8750]'
+                  activeMegaMenu === 'works'
+                    ? 'text-[#D8A56E]'
+                    : isScrolled
+                      ? 'text-[#2A2A2A] hover:text-[#BD8750]'
+                      : 'text-white/85 hover:text-[#D8A56E]'
                 }`}
               >
                 <span>Works</span>
                 <ChevronDown
                   className={`w-3.5 h-3.5 transition-transform duration-300 ${
-                    activeMegaMenu === 'works' ? 'rotate-180 text-[#D8A56E]' : 'text-[#2A2A2A]/50'
+                    activeMegaMenu === 'works'
+                      ? 'rotate-180 text-[#D8A56E]'
+                      : isScrolled
+                        ? 'text-[#2A2A2A]/50'
+                        : 'text-white/40'
                   }`}
                 />
               </button>
@@ -210,13 +226,21 @@ export default function Navbar({ onOpenTenders, onOpenConsultation }) {
             >
               <button
                 className={`flex items-center space-x-1.5 text-xs font-semibold tracking-[0.2em] uppercase transition-colors py-2 ${
-                  activeMegaMenu === 'atelier' ? 'text-[#D8A56E]' : 'text-[#2A2A2A] hover:text-[#BD8750]'
+                  activeMegaMenu === 'atelier'
+                    ? 'text-[#D8A56E]'
+                    : isScrolled
+                      ? 'text-[#2A2A2A] hover:text-[#BD8750]'
+                      : 'text-white/85 hover:text-[#D8A56E]'
                 }`}
               >
                 <span>Atelier</span>
                 <ChevronDown
                   className={`w-3.5 h-3.5 transition-transform duration-300 ${
-                    activeMegaMenu === 'atelier' ? 'rotate-180 text-[#D8A56E]' : 'text-[#2A2A2A]/50'
+                    activeMegaMenu === 'atelier'
+                      ? 'rotate-180 text-[#D8A56E]'
+                      : isScrolled
+                        ? 'text-[#2A2A2A]/50'
+                        : 'text-white/40'
                   }`}
                 />
               </button>
@@ -318,13 +342,21 @@ export default function Navbar({ onOpenTenders, onOpenConsultation }) {
             >
               <button
                 className={`flex items-center space-x-1.5 text-xs font-semibold tracking-[0.2em] uppercase transition-colors py-2 ${
-                  activeMegaMenu === 'enterprise' ? 'text-[#D8A56E]' : 'text-[#2A2A2A] hover:text-[#BD8750]'
+                  activeMegaMenu === 'enterprise'
+                    ? 'text-[#D8A56E]'
+                    : isScrolled
+                      ? 'text-[#2A2A2A] hover:text-[#BD8750]'
+                      : 'text-white/85 hover:text-[#D8A56E]'
                 }`}
               >
                 <span>Enterprise</span>
                 <ChevronDown
                   className={`w-3.5 h-3.5 transition-transform duration-300 ${
-                    activeMegaMenu === 'enterprise' ? 'rotate-180 text-[#D8A56E]' : 'text-[#2A2A2A]/50'
+                    activeMegaMenu === 'enterprise'
+                      ? 'rotate-180 text-[#D8A56E]'
+                      : isScrolled
+                        ? 'text-[#2A2A2A]/50'
+                        : 'text-white/40'
                   }`}
                 />
               </button>
@@ -390,7 +422,9 @@ export default function Navbar({ onOpenTenders, onOpenConsultation }) {
             <a
               href="#contact"
               onClick={closeMegaMenu}
-              className="text-xs font-semibold tracking-[0.2em] uppercase text-[#2A2A2A] hover:text-[#BD8750] transition-colors"
+              className={`text-xs font-semibold tracking-[0.2em] uppercase transition-colors ${
+                isScrolled ? 'text-[#2A2A2A] hover:text-[#BD8750]' : 'text-white/85 hover:text-[#D8A56E]'
+              }`}
             >
               Contact
             </a>
@@ -400,7 +434,7 @@ export default function Navbar({ onOpenTenders, onOpenConsultation }) {
                 closeMegaMenu();
                 onOpenConsultation();
               }}
-              className="px-6 py-2.5 rounded-full text-xs tracking-wider font-bold bg-[#D8A56E] hover:bg-[#BD8750] text-[#2A2A2A] transition-all duration-300 shadow-md shadow-[#D8A56E]/20 hover:shadow-[#BD8750]/30"
+              className="px-6 py-2.5 rounded-full text-xs tracking-wider font-bold bg-[#D8A56E] hover:bg-[#BD8750] text-[#0D0D0D] transition-all duration-300 shadow-md shadow-[#D8A56E]/20 hover:shadow-[#BD8750]/30"
             >
               BOOK CONSULTATION
             </button>
@@ -410,13 +444,17 @@ export default function Navbar({ onOpenTenders, onOpenConsultation }) {
           <div className="lg:hidden flex items-center space-x-3">
             <button
               onClick={onOpenConsultation}
-              className="px-3 py-1.5 text-[11px] rounded-full bg-[#D8A56E] hover:bg-[#BD8750] text-[#2A2A2A] font-bold tracking-wider"
+              className="px-3 py-1.5 text-[11px] rounded-full bg-[#D8A56E] hover:bg-[#BD8750] text-[#0D0D0D] font-bold tracking-wider"
             >
               INQUIRE
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-[#2A2A2A] hover:text-[#BD8750] glass-pill focus:outline-none"
+              className={`p-2 rounded-lg transition-colors focus:outline-none ${
+                isScrolled
+                  ? 'text-[#2A2A2A] hover:text-[#BD8750] glass-pill'
+                  : 'text-white hover:text-[#D8A56E] border border-white/15 bg-white/5'
+              }`}
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

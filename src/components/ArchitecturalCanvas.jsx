@@ -75,10 +75,11 @@ export default function BlueprintCanvas() {
     window.addEventListener('touchmove', onTouchMove, { passive: true });
     window.addEventListener('touchend', onTouchEnd);
 
-    // ── Unified Structural Amber Palette ─────────────────────────────────
-    const GRAPHITE = 'rgba(42, 42, 42, ';    // Deep Graphite #2A2A2A (Form Lines)
-    const OCHRE = 'rgba(216, 165, 110, ';     // Warm Ochre/Clay #D8A56E (Active Accents)
-    const TERRACOTTA = 'rgba(189, 135, 80, '; // Deeper Terracotta #BD8750 (Hover/Glow)
+    // ── Architectural Gold & Amber Palette on Black ──────────────────────
+    const G0 = 'rgba(212, 175, 55, ';     // Champagne / Rich Gold (#D4AF37)
+    const GW = 'rgba(255, 240, 160, ';    // Warm Highlight Gold
+    const GD = 'rgba(150, 115, 35, ';     // Deep Dark Gold
+    const GOCHRE = 'rgba(216, 165, 110, '; // Warm Ochre Accent (#D8A56E)
 
     // ── 3D House Vertex & Edge Geometry ────────────────────────────────────
     const buildGeometry = () => {
@@ -144,7 +145,7 @@ export default function BlueprintCanvas() {
         edge(la, la + 1, 'louver');
       }
 
-      // Slim structural columns (accented in Warm Ochre)
+      // Slim structural columns (accented in bright glowing gold)
       const cols = [[170, 0, 80], [170, 0, -90], [30, 0, -90], [-190, 0, 100], [-190, 0, -80]];
       cols.forEach(([cx, cy, cz]) => {
         const ca = V.length;
@@ -186,7 +187,7 @@ export default function BlueprintCanvas() {
 
     const { V, E } = buildGeometry();
 
-    // Floating ambient ochre particles
+    // Floating ambient gold particles
     const particles = Array.from({ length: 45 }, () => ({
       x: (Math.random() - 0.5) * 900,
       y: (Math.random() - 0.5) * 500,
@@ -217,16 +218,16 @@ export default function BlueprintCanvas() {
       if (laserY > 150) laserDir = -1;
       if (laserY < -150) laserDir = 1;
 
-      // Clear with Warm Stone-Linen (#E1DDD4)
+      // Clear with matte black (#0D0D0D)
       ctx.clearRect(0, 0, W, H);
-      ctx.fillStyle = '#E1DDD4';
+      ctx.fillStyle = '#0D0D0D';
       ctx.fillRect(0, 0, W, H);
 
-      // Radial Warm Ochre aura
+      // Radial gold aura centered at the 3D model position
       const grd = ctx.createRadialGradient(W * 0.72, H * 0.50, 40, W * 0.72, H * 0.50, W * 0.55);
-      grd.addColorStop(0, 'rgba(216, 165, 110, 0.20)');
-      grd.addColorStop(0.5, 'rgba(216, 165, 110, 0.07)');
-      grd.addColorStop(1, 'rgba(225, 221, 212, 0)');
+      grd.addColorStop(0, 'rgba(212, 175, 55, 0.12)');
+      grd.addColorStop(0.5, 'rgba(10, 8, 0, 0.40)');
+      grd.addColorStop(1, 'rgba(13, 13, 13, 0)');
       ctx.fillStyle = grd;
       ctx.fillRect(0, 0, W, H);
 
@@ -249,7 +250,7 @@ export default function BlueprintCanvas() {
 
       const PV = V.map(([x, y, z]) => project(x, y, z));
 
-      // Particles
+      // Particles in glowing gold
       particles.forEach((p) => {
         p.y += p.vy;
         if (p.y < -260) p.y = 260;
@@ -257,12 +258,12 @@ export default function BlueprintCanvas() {
         if (pp.s > 0) {
           ctx.beginPath();
           ctx.arc(pp.px, pp.py, p.r * pp.s, 0, Math.PI * 2);
-          ctx.fillStyle = `${OCHRE}${Math.min(p.a * pp.s * 1.4, 0.85)})`;
+          ctx.fillStyle = `${G0}${Math.min(p.a * pp.s * 1.4, 0.9)})`;
           ctx.fill();
         }
       });
 
-      // Wireframe edges in Deep Graphite & Warm Ochre
+      // Wireframe edges sorted by depth
       const sortedEdges = [...E].sort((a, b) => {
         const za = (PV[a[0]].z + PV[a[1]].z) / 2;
         const zb = (PV[b[0]].z + PV[b[1]].z) / 2;
@@ -278,44 +279,44 @@ export default function BlueprintCanvas() {
         ctx.lineTo(p2.px, p2.py);
 
         if (type === 'primary') {
-          ctx.strokeStyle = `${GRAPHITE}0.85)`;
+          ctx.strokeStyle = `${G0}0.92)`;
           ctx.lineWidth = 1.8;
           ctx.setLineDash([]);
         } else if (type === 'secondary') {
-          ctx.strokeStyle = `${GRAPHITE}0.55)`;
-          ctx.lineWidth = 1.3;
+          ctx.strokeStyle = `${G0}0.60)`;
+          ctx.lineWidth = 1.4;
           ctx.setLineDash([]);
         } else if (type === 'dim') {
-          ctx.strokeStyle = `${GRAPHITE}0.25)`;
-          ctx.lineWidth = 1.0;
+          ctx.strokeStyle = `${GD}0.55)`;
+          ctx.lineWidth = 1.1;
           ctx.setLineDash([]);
         } else if (type === 'louver') {
-          ctx.strokeStyle = `${OCHRE}0.65)`;
-          ctx.lineWidth = 1.0;
+          ctx.strokeStyle = `${GOCHRE}0.50)`;
+          ctx.lineWidth = 0.9;
           ctx.setLineDash([]);
         } else if (type === 'column') {
-          ctx.strokeStyle = `${OCHRE}0.95)`;
+          ctx.strokeStyle = `${GW}0.95)`;
           ctx.lineWidth = 2.4;
           ctx.setLineDash([]);
         } else if (type === 'glass') {
-          ctx.strokeStyle = `${GRAPHITE}0.45)`;
-          ctx.lineWidth = 1.1;
+          ctx.strokeStyle = `${GW}0.65)`;
+          ctx.lineWidth = 1.2;
           ctx.setLineDash([]);
         } else if (type === 'detail') {
-          ctx.strokeStyle = `${GRAPHITE}0.20)`;
+          ctx.strokeStyle = `${G0}0.25)`;
           ctx.lineWidth = 0.8;
           ctx.setLineDash([4, 4]);
         } else if (type === 'pool') {
           const shimmer = 0.35 + 0.2 * Math.sin(time * 3 + i);
-          ctx.strokeStyle = `rgba(189, 135, 80, ${shimmer})`;
+          ctx.strokeStyle = `rgba(180, 220, 255, ${shimmer})`;
           ctx.lineWidth = 1.4;
           ctx.setLineDash([]);
         } else if (type === 'grid') {
-          ctx.strokeStyle = `${GRAPHITE}0.08)`;
-          ctx.lineWidth = 0.6;
+          ctx.strokeStyle = `${G0}0.09)`;
+          ctx.lineWidth = 0.7;
           ctx.setLineDash([]);
         } else {
-          ctx.strokeStyle = `${GRAPHITE}0.35)`;
+          ctx.strokeStyle = `${G0}0.40)`;
           ctx.lineWidth = 1.0;
           ctx.setLineDash([]);
         }
@@ -323,55 +324,55 @@ export default function BlueprintCanvas() {
         ctx.setLineDash([]);
       });
 
-      // Joint nodes (Warm Ochre #D8A56E)
+      // Glowing joint nodes
       PV.forEach((p, i) => {
         if (p.s <= 0) return;
         const isKey = E.some(([a, b, t]) => (a === i || b === i) && (t === 'primary' || t === 'column'));
         if (!isKey) return;
         ctx.beginPath();
         ctx.arc(p.px, p.py, 2.5 * p.s, 0, Math.PI * 2);
-        ctx.fillStyle = `${OCHRE}0.95)`;
-        ctx.shadowColor = '#D8A56E';
-        ctx.shadowBlur = 6;
+        ctx.fillStyle = `${GW}0.88)`;
+        ctx.shadowColor = '#D4AF37';
+        ctx.shadowBlur = 10;
         ctx.fill();
         ctx.shadowBlur = 0;
       });
 
-      // Horizontal laser scan line in Warm Ochre
+      // Horizontal laser scan line in gold
       const sl1 = project(-230, laserY, 0);
       const sl2 = project(230, laserY, 0);
       if (sl1.s > 0 && sl2.s > 0) {
         ctx.beginPath();
         ctx.moveTo(sl1.px, sl1.py);
         ctx.lineTo(sl2.px, sl2.py);
-        ctx.strokeStyle = `${OCHRE}0.50)`;
+        ctx.strokeStyle = `${G0}0.48)`;
         ctx.lineWidth = 1.2;
         ctx.setLineDash([8, 6]);
         ctx.stroke();
         ctx.setLineDash([]);
       }
 
-      // HUD: compass dial in Deep Graphite & Ochre
+      // HUD: compass dial in gold
       const cx2 = W - 64, cy2 = H - 90;
-      ctx.strokeStyle = `${GRAPHITE}0.25)`;
+      ctx.strokeStyle = `${G0}0.30)`;
       ctx.lineWidth = 1;
       ctx.beginPath(); ctx.arc(cx2, cy2, 20, 0, Math.PI * 2); ctx.stroke();
 
       const compassAngle = -rotY - Math.PI / 2;
-      ctx.strokeStyle = `${OCHRE}0.90)`;
-      ctx.lineWidth = 1.6;
+      ctx.strokeStyle = `${G0}0.75)`;
+      ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.moveTo(cx2, cy2);
       ctx.lineTo(cx2 + Math.cos(compassAngle) * 16, cy2 + Math.sin(compassAngle) * 16);
       ctx.stroke();
 
       ctx.font = `bold 9px "Space Grotesk", monospace`;
-      ctx.fillStyle = `${GRAPHITE}0.75)`;
+      ctx.fillStyle = `${G0}0.60)`;
       ctx.textAlign = 'center';
       ctx.fillText('N', cx2 + Math.cos(compassAngle) * 24, cy2 + Math.sin(compassAngle) * 24 + 3);
 
       ctx.font = `8px "Space Grotesk", monospace`;
-      ctx.fillStyle = `${GRAPHITE}0.50)`;
+      ctx.fillStyle = `${G0}0.40)`;
       ctx.fillText('1:50', cx2, cy2 + 35);
       ctx.fillText('DRAG TO ORBIT', cx2, cy2 + 47);
 
