@@ -31,7 +31,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0D0D0D] text-[#F8F9FA] selection:bg-[#D4AF37]/30 selection:text-[#F3E5AB]">
+    <div className="min-h-screen bg-[#E1DDD4] text-[#2A2A2A] selection:bg-[#D8A56E]/30 selection:text-[#2A2A2A]">
       {/* Glassmorphism Navigation */}
       <Navbar
         onOpenTenders={() => setTendersOpen(true)}

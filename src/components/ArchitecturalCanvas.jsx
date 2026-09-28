@@ -75,16 +75,12 @@ export default function BlueprintCanvas() {
     window.addEventListener('touchmove', onTouchMove, { passive: true });
     window.addEventListener('touchend', onTouchEnd);
 
-    // ── Gold palette ────────────────────────────────────────────────────────
-    const G0 = 'rgba(212,175,55,'; // base gold
-    const GW = 'rgba(255,240,160,'; // warm highlight
-    const GD = 'rgba(140,110,30,';  // dim gold
+    // ── Unified Structural Amber Palette ─────────────────────────────────
+    const GRAPHITE = 'rgba(42, 42, 42, ';    // Deep Graphite #2A2A2A (Form Lines)
+    const OCHRE = 'rgba(216, 165, 110, ';     // Warm Ochre/Clay #D8A56E (Active Accents)
+    const TERRACOTTA = 'rgba(189, 135, 80, '; // Deeper Terracotta #BD8750 (Hover/Glow)
 
     // ── 3D House Vertex & Edge Geometry ────────────────────────────────────
-    // We model a full modernist villa: base podium, two-storey main block,
-    // deep cantilever upper floor, vertical louver screen, roof garden slab,
-    // reflecting pool, ground grid, interior wall hints.
-
     const buildGeometry = () => {
       const V = []; // vertices [x, y, z]
       const E = []; // edges [i, j, type]
@@ -107,40 +103,39 @@ export default function BlueprintCanvas() {
         add(cx + hw, cy + hh, cz + hd);
         add(cx - hw, cy + hh, cz + hd);
         // bottom
-        edge(i0,i0+1,type); edge(i0+1,i0+2,type); edge(i0+2,i0+3,type); edge(i0+3,i0,type);
+        edge(i0, i0 + 1, type); edge(i0 + 1, i0 + 2, type); edge(i0 + 2, i0 + 3, type); edge(i0 + 3, i0, type);
         // top
-        edge(i0+4,i0+5,type); edge(i0+5,i0+6,type); edge(i0+6,i0+7,type); edge(i0+7,i0+4,type);
+        edge(i0 + 4, i0 + 5, type); edge(i0 + 5, i0 + 6, type); edge(i0 + 6, i0 + 7, type); edge(i0 + 7, i0 + 4, type);
         // verticals
-        edge(i0,i0+4,type); edge(i0+1,i0+5,type); edge(i0+2,i0+6,type); edge(i0+3,i0+7,type);
+        edge(i0, i0 + 4, type); edge(i0 + 1, i0 + 5, type); edge(i0 + 2, i0 + 6, type); edge(i0 + 3, i0 + 7, type);
         return i0;
       };
 
-      // ── Foundation podium ─────────────────────────────────────────────
+      // Foundation podium
       box(0, -92, 0, 400, 16, 280, 'dim');
 
-      // ── Reflecting pool (depressed basin) ────────────────────────────
+      // Reflecting pool
       box(-80, -85, 65, 180, 5, 130, 'pool');
 
-      // ── Ground floor main block ───────────────────────────────────────
+      // Ground floor main block
       box(50, -40, -10, 260, 96, 200, 'secondary');
 
-      // ── Interior floor-level divider hint ─────────────────────────────
-      // horizontal slab at mid-height
+      // Interior floor-level divider hint
       const sf = V.length;
       add(-80, -40, -110); add(180, -40, -110);
       add(180, -40, 110);  add(-80, -40, 110);
-      edge(sf,sf+1,'detail'); edge(sf+1,sf+2,'detail'); edge(sf+2,sf+3,'detail'); edge(sf+3,sf,'detail');
+      edge(sf, sf + 1, 'detail'); edge(sf + 1, sf + 2, 'detail'); edge(sf + 2, sf + 3, 'detail'); edge(sf + 3, sf, 'detail');
 
-      // ── Cantilevered upper floor (extends left over pool) ─────────────
+      // Cantilevered upper floor
       box(-50, 40, 0, 360, 76, 220, 'primary');
 
-      // ── Deep cantilevered roof / canopy slab ─────────────────────────
+      // Deep cantilevered roof / canopy slab
       box(-70, 82, 0, 390, 14, 240, 'primary');
 
-      // ── Roof garden parapet ───────────────────────────────────────────
+      // Roof garden parapet
       box(-68, 96, 0, 388, 10, 238, 'dim');
 
-      // ── Vertical louver screen (upper left facade) ───────────────────
+      // Vertical louver screen
       const louverCount = 18;
       for (let i = 0; i < louverCount; i++) {
         const lx = -220 + i * 14;
@@ -149,36 +144,34 @@ export default function BlueprintCanvas() {
         edge(la, la + 1, 'louver');
       }
 
-      // ── Slim structural columns ───────────────────────────────────────
-      const cols = [[170,0,80],[170,0,-90],[30,0,-90],[-190,0,100],[-190,0,-80]];
+      // Slim structural columns (accented in Warm Ochre)
+      const cols = [[170, 0, 80], [170, 0, -90], [30, 0, -90], [-190, 0, 100], [-190, 0, -80]];
       cols.forEach(([cx, cy, cz]) => {
         const ca = V.length;
         add(cx, cy - 48, cz); add(cx, cy + 50, cz);
         edge(ca, ca + 1, 'column');
       });
 
-      // ── Window cutouts (front facade, upper floor) ────────────────────
-      // Upper front facade window frames (3 wide openings)
-      const wins = [[-160,55,-110],[-50,55,-110],[70,55,-110],[165,55,-110]];
+      // Window cutouts
+      const wins = [[-160, 55, -110], [-50, 55, -110], [70, 55, -110], [165, 55, -110]];
       wins.forEach(([wx, wy, wz]) => {
         const wa = V.length;
-        add(wx-24, wy-24, wz); add(wx+24, wy-24, wz);
-        add(wx+24, wy+24, wz); add(wx-24, wy+24, wz);
-        edge(wa,wa+1,'glass'); edge(wa+1,wa+2,'glass'); edge(wa+2,wa+3,'glass'); edge(wa+3,wa,'glass');
-        // cross dividers
-        edge(wa,wa+2,'detail'); edge(wa+1,wa+3,'detail');
+        add(wx - 24, wy - 24, wz); add(wx + 24, wy - 24, wz);
+        add(wx + 24, wy + 24, wz); add(wx - 24, wy + 24, wz);
+        edge(wa, wa + 1, 'glass'); edge(wa + 1, wa + 2, 'glass'); edge(wa + 2, wa + 3, 'glass'); edge(wa + 3, wa, 'glass');
+        edge(wa, wa + 2, 'detail'); edge(wa + 1, wa + 3, 'detail');
       });
 
-      // Ground floor windows (bottom facade)
-      const gwins = [[-60,-10,-110],[50,-10,-110],[150,-10,-110]];
+      // Ground floor windows
+      const gwins = [[-60, -10, -110], [50, -10, -110], [150, -10, -110]];
       gwins.forEach(([wx, wy, wz]) => {
         const wa = V.length;
-        add(wx-26, wy-28, wz); add(wx+26, wy-28, wz);
-        add(wx+26, wy+28, wz); add(wx-26, wy+28, wz);
-        edge(wa,wa+1,'glass'); edge(wa+1,wa+2,'glass'); edge(wa+2,wa+3,'glass'); edge(wa+3,wa,'glass');
+        add(wx - 26, wy - 28, wz); add(wx + 26, wy - 28, wz);
+        add(wx + 26, wy + 28, wz); add(wx - 26, wy + 28, wz);
+        edge(wa, wa + 1, 'glass'); edge(wa + 1, wa + 2, 'glass'); edge(wa + 2, wa + 3, 'glass'); edge(wa + 3, wa, 'glass');
       });
 
-      // ── Ground axis grid ──────────────────────────────────────────────
+      // Ground axis grid
       for (let g = -5; g <= 5; g++) {
         const ga = V.length;
         add(g * 62, -85, -240); add(g * 62, -85, 240);
@@ -193,56 +186,52 @@ export default function BlueprintCanvas() {
 
     const { V, E } = buildGeometry();
 
-    // ── Floating ambient particles ────────────────────────────────────────
-    const particles = Array.from({ length: 60 }, () => ({
+    // Floating ambient ochre particles
+    const particles = Array.from({ length: 45 }, () => ({
       x: (Math.random() - 0.5) * 900,
       y: (Math.random() - 0.5) * 500,
       z: (Math.random() - 0.5) * 700,
       vy: -0.18 - Math.random() * 0.28,
       r: Math.random() * 2 + 0.8,
-      a: Math.random() * 0.6 + 0.15,
+      a: Math.random() * 0.6 + 0.2,
     }));
 
-    // ── Laser scan ────────────────────────────────────────────────────────
+    // Laser scan
     let laserY = -140, laserDir = 1;
 
     const render = () => {
       time += 0.014;
       const ir = interactionRef.current;
 
-      // Smooth interpolation
       ir.rotY += (ir.targetRotY - ir.rotY) * 0.055;
       ir.rotX += (ir.targetRotX - ir.rotX) * 0.055;
       ir.mouseNX += (ir.targetNX - ir.mouseNX) * 0.06;
       ir.mouseNY += (ir.targetNY - ir.mouseNY) * 0.06;
 
-      // Auto-rotate when not dragging
       if (!ir.isDragging) ir.targetRotY += 0.0015;
 
       const rotY = ir.rotY + ir.mouseNX * 0.18;
       const rotX = ir.rotX + ir.mouseNY * 0.10;
 
-      // Laser scan
       laserY += laserDir * 1.4;
       if (laserY > 150) laserDir = -1;
       if (laserY < -150) laserDir = 1;
 
-      // Clear
+      // Clear with Warm Stone-Linen (#E1DDD4)
       ctx.clearRect(0, 0, W, H);
-      ctx.fillStyle = '#0D0D0D';
+      ctx.fillStyle = '#E1DDD4';
       ctx.fillRect(0, 0, W, H);
 
-      // ── Radial gold aura (centered on the 3D model position) ────────────
+      // Radial Warm Ochre aura
       const grd = ctx.createRadialGradient(W * 0.72, H * 0.50, 40, W * 0.72, H * 0.50, W * 0.55);
-      grd.addColorStop(0, 'rgba(212,175,55,0.10)');
-      grd.addColorStop(0.5, 'rgba(10,8,0,0.4)');
-      grd.addColorStop(1, 'rgba(13,13,13,0)');
+      grd.addColorStop(0, 'rgba(216, 165, 110, 0.20)');
+      grd.addColorStop(0.5, 'rgba(216, 165, 110, 0.07)');
+      grd.addColorStop(1, 'rgba(225, 221, 212, 0)');
       ctx.fillStyle = grd;
       ctx.fillRect(0, 0, W, H);
 
-      // ── Projection ─────────────────────────────────────────────────────
+      // Projection
       const FOV = 560, CAM_Z = 640;
-      // Place model in the right 40% of the viewport
       const CX = W * 0.72;
       const CY = H * 0.50;
 
@@ -260,7 +249,7 @@ export default function BlueprintCanvas() {
 
       const PV = V.map(([x, y, z]) => project(x, y, z));
 
-      // ── Particles ──────────────────────────────────────────────────────
+      // Particles
       particles.forEach((p) => {
         p.y += p.vy;
         if (p.y < -260) p.y = 260;
@@ -268,13 +257,12 @@ export default function BlueprintCanvas() {
         if (pp.s > 0) {
           ctx.beginPath();
           ctx.arc(pp.px, pp.py, p.r * pp.s, 0, Math.PI * 2);
-          ctx.fillStyle = `${G0}${Math.min(p.a * pp.s * 1.4, 0.9)})`;
+          ctx.fillStyle = `${OCHRE}${Math.min(p.a * pp.s * 1.4, 0.85)})`;
           ctx.fill();
         }
       });
 
-      // ── Wireframe edges ─────────────────────────────────────────────────
-      // Sort by avg Z for depth feel
+      // Wireframe edges in Deep Graphite & Warm Ochre
       const sortedEdges = [...E].sort((a, b) => {
         const za = (PV[a[0]].z + PV[a[1]].z) / 2;
         const zb = (PV[b[0]].z + PV[b[1]].z) / 2;
@@ -290,44 +278,44 @@ export default function BlueprintCanvas() {
         ctx.lineTo(p2.px, p2.py);
 
         if (type === 'primary') {
-          ctx.strokeStyle = `${G0}0.88)`;
+          ctx.strokeStyle = `${GRAPHITE}0.85)`;
           ctx.lineWidth = 1.8;
           ctx.setLineDash([]);
         } else if (type === 'secondary') {
-          ctx.strokeStyle = `${G0}0.55)`;
-          ctx.lineWidth = 1.4;
+          ctx.strokeStyle = `${GRAPHITE}0.55)`;
+          ctx.lineWidth = 1.3;
           ctx.setLineDash([]);
         } else if (type === 'dim') {
-          ctx.strokeStyle = `${GD}0.50)`;
-          ctx.lineWidth = 1.1;
+          ctx.strokeStyle = `${GRAPHITE}0.25)`;
+          ctx.lineWidth = 1.0;
           ctx.setLineDash([]);
         } else if (type === 'louver') {
-          ctx.strokeStyle = `${G0}0.42)`;
-          ctx.lineWidth = 0.9;
+          ctx.strokeStyle = `${OCHRE}0.65)`;
+          ctx.lineWidth = 1.0;
           ctx.setLineDash([]);
         } else if (type === 'column') {
-          ctx.strokeStyle = `${GW}0.90)`;
-          ctx.lineWidth = 2.2;
+          ctx.strokeStyle = `${OCHRE}0.95)`;
+          ctx.lineWidth = 2.4;
           ctx.setLineDash([]);
         } else if (type === 'glass') {
-          ctx.strokeStyle = `${GW}0.60)`;
-          ctx.lineWidth = 1.2;
+          ctx.strokeStyle = `${GRAPHITE}0.45)`;
+          ctx.lineWidth = 1.1;
           ctx.setLineDash([]);
         } else if (type === 'detail') {
-          ctx.strokeStyle = `${G0}0.22)`;
+          ctx.strokeStyle = `${GRAPHITE}0.20)`;
           ctx.lineWidth = 0.8;
           ctx.setLineDash([4, 4]);
         } else if (type === 'pool') {
           const shimmer = 0.35 + 0.2 * Math.sin(time * 3 + i);
-          ctx.strokeStyle = `rgba(180,220,255,${shimmer})`;
+          ctx.strokeStyle = `rgba(189, 135, 80, ${shimmer})`;
           ctx.lineWidth = 1.4;
           ctx.setLineDash([]);
         } else if (type === 'grid') {
-          ctx.strokeStyle = `${G0}0.08)`;
-          ctx.lineWidth = 0.7;
+          ctx.strokeStyle = `${GRAPHITE}0.08)`;
+          ctx.lineWidth = 0.6;
           ctx.setLineDash([]);
         } else {
-          ctx.strokeStyle = `${G0}0.35)`;
+          ctx.strokeStyle = `${GRAPHITE}0.35)`;
           ctx.lineWidth = 1.0;
           ctx.setLineDash([]);
         }
@@ -335,56 +323,55 @@ export default function BlueprintCanvas() {
         ctx.setLineDash([]);
       });
 
-      // ── Glowing joint nodes ─────────────────────────────────────────────
+      // Joint nodes (Warm Ochre #D8A56E)
       PV.forEach((p, i) => {
         if (p.s <= 0) return;
-        // Only draw nodes for primary structure edges endpoints
         const isKey = E.some(([a, b, t]) => (a === i || b === i) && (t === 'primary' || t === 'column'));
         if (!isKey) return;
         ctx.beginPath();
         ctx.arc(p.px, p.py, 2.5 * p.s, 0, Math.PI * 2);
-        ctx.fillStyle = `${GW}0.85)`;
-        ctx.shadowColor = '#D4AF37';
-        ctx.shadowBlur = 10;
+        ctx.fillStyle = `${OCHRE}0.95)`;
+        ctx.shadowColor = '#D8A56E';
+        ctx.shadowBlur = 6;
         ctx.fill();
         ctx.shadowBlur = 0;
       });
 
-      // ── Horizontal laser scan line ─────────────────────────────────────
+      // Horizontal laser scan line in Warm Ochre
       const sl1 = project(-230, laserY, 0);
       const sl2 = project(230, laserY, 0);
       if (sl1.s > 0 && sl2.s > 0) {
         ctx.beginPath();
         ctx.moveTo(sl1.px, sl1.py);
         ctx.lineTo(sl2.px, sl2.py);
-        ctx.strokeStyle = `${G0}0.45)`;
+        ctx.strokeStyle = `${OCHRE}0.50)`;
         ctx.lineWidth = 1.2;
         ctx.setLineDash([8, 6]);
         ctx.stroke();
         ctx.setLineDash([]);
       }
 
-      // ── HUD: compass dial ───────────────────────────────────────────────
+      // HUD: compass dial in Deep Graphite & Ochre
       const cx2 = W - 64, cy2 = H - 90;
-      ctx.strokeStyle = `${G0}0.30)`;
+      ctx.strokeStyle = `${GRAPHITE}0.25)`;
       ctx.lineWidth = 1;
       ctx.beginPath(); ctx.arc(cx2, cy2, 20, 0, Math.PI * 2); ctx.stroke();
-      // Rotating N pointer
+
       const compassAngle = -rotY - Math.PI / 2;
-      ctx.strokeStyle = `${G0}0.70)`;
-      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = `${OCHRE}0.90)`;
+      ctx.lineWidth = 1.6;
       ctx.beginPath();
       ctx.moveTo(cx2, cy2);
       ctx.lineTo(cx2 + Math.cos(compassAngle) * 16, cy2 + Math.sin(compassAngle) * 16);
       ctx.stroke();
+
       ctx.font = `bold 9px "Space Grotesk", monospace`;
-      ctx.fillStyle = `${G0}0.55)`;
+      ctx.fillStyle = `${GRAPHITE}0.75)`;
       ctx.textAlign = 'center';
       ctx.fillText('N', cx2 + Math.cos(compassAngle) * 24, cy2 + Math.sin(compassAngle) * 24 + 3);
 
-      // Scale
       ctx.font = `8px "Space Grotesk", monospace`;
-      ctx.fillStyle = `${G0}0.35)`;
+      ctx.fillStyle = `${GRAPHITE}0.50)`;
       ctx.fillText('1:50', cx2, cy2 + 35);
       ctx.fillText('DRAG TO ORBIT', cx2, cy2 + 47);
 

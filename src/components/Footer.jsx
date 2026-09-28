@@ -19,43 +19,43 @@ export default function Footer({ onOpenTenders, onOpenConsultation }) {
   };
 
   return (
-    <footer className="relative bg-[#080808] text-white border-t border-white/10 pt-20 pb-12 overflow-hidden">
+    <footer className="relative bg-[#F2F0EC] text-[#2A2A2A] border-t border-[#2A2A2A]/10 pt-20 pb-12 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-[#2A2A2A]/10">
           {/* Col 1: Brand & Atelier Vision (5 cols) */}
           <div className="lg:col-span-5 space-y-5">
             <div className="flex items-center space-x-3.5">
-              <div className="w-9 h-9 border border-[#D4AF37]/80 rounded flex items-center justify-center bg-black/60">
+              <div className="w-9 h-9 border border-[#2A2A2A]/20 rounded-lg flex items-center justify-center bg-[#E1DDD4]">
                 <svg
                   viewBox="0 0 40 40"
-                  className="w-6 h-6 text-[#D4AF37]"
+                  className="w-5 h-5 text-[#2A2A2A]"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2.2"
                 >
                   <path d="M12 28 L18 12 L24 28" />
                   <path d="M14 23 L22 23" />
-                  <line x1="20" y1="10" x2="20" y2="30" strokeOpacity="0.4" strokeDasharray="2 2" />
-                  <rect x="2" y="2" width="36" height="36" rx="2" stroke="currentColor" strokeWidth="1.2" strokeOpacity="0.3" />
+                  <line x1="20" y1="10" x2="20" y2="30" stroke="#D8A56E" strokeOpacity="0.8" strokeDasharray="2 2" />
+                  <rect x="2" y="2" width="36" height="36" rx="2" stroke="currentColor" strokeWidth="1.2" strokeOpacity="0.25" />
                 </svg>
               </div>
 
               <div className="flex flex-col text-left">
-                <span className="font-monumental tracking-[0.22em] text-white text-base font-bold uppercase">
+                <span className="font-monumental tracking-[0.22em] text-[#2A2A2A] text-base font-bold uppercase">
                   ARCHITECT&apos;S
                 </span>
-                <span className="text-[10px] tracking-[0.35em] text-[#D4AF37] font-semibold uppercase">
+                <span className="text-[10px] tracking-[0.35em] text-[#D8A56E] font-bold uppercase">
                   AVENUE
                 </span>
               </div>
             </div>
 
-            <p className="text-neutral-400 text-xs sm:text-sm font-light leading-relaxed max-w-sm">
+            <p className="text-[#2A2A2A]/80 text-xs sm:text-sm font-light leading-relaxed max-w-sm">
               Architecture Avenue is an elite architectural atelier creating monolithic residences, luxury villas, and sustainable commercial landmarks across India and the Middle East.
             </p>
 
             {/* Licensure details */}
-            <div className="text-[11px] font-mono text-neutral-500 space-y-1">
+            <div className="text-[11px] font-mono text-[#2A2A2A]/60 space-y-1">
               <p>Council of Architecture (CoA) Reg: CA/2014/68903</p>
               <p>Indian Institute of Architects (IIA) Corporate Fellow</p>
               <p>GSTIN: 09AAVFA7373H1ZT</p>
@@ -64,37 +64,37 @@ export default function Footer({ onOpenTenders, onOpenConsultation }) {
 
           {/* Col 2: Directory Links (2 cols) */}
           <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-xs font-mono uppercase tracking-widest text-[#D4AF37]">
+            <h4 className="text-xs font-mono uppercase tracking-widest text-[#D8A56E] font-bold">
               Directory
             </h4>
-            <ul className="space-y-2 text-xs text-neutral-400">
+            <ul className="space-y-2 text-xs text-[#2A2A2A]/75 font-medium">
               <li>
-                <a href="#home" className="hover:text-white transition-colors">
+                <a href="#home" className="hover:text-[#BD8750] transition-colors">
                   Main Atelier
                 </a>
               </li>
               <li>
-                <a href="#portfolio" className="hover:text-white transition-colors">
+                <a href="#portfolio" className="hover:text-[#BD8750] transition-colors">
                   Selected Works
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-white transition-colors">
+                <a href="#services" className="hover:text-[#BD8750] transition-colors">
                   Services &amp; DSR
                 </a>
               </li>
               <li>
-                <a href="#comparison" className="hover:text-white transition-colors">
+                <a href="#comparison" className="hover:text-[#BD8750] transition-colors">
                   Concept vs Reality
                 </a>
               </li>
               <li>
-                <a href="#philosophy" className="hover:text-white transition-colors">
+                <a href="#philosophy" className="hover:text-[#BD8750] transition-colors">
                   Design Philosophy
                 </a>
               </li>
               <li>
-                <a href="#contact" className="hover:text-white transition-colors">
+                <a href="#contact" className="hover:text-[#BD8750] transition-colors">
                   Client Inquiries
                 </a>
               </li>
@@ -103,27 +103,27 @@ export default function Footer({ onOpenTenders, onOpenConsultation }) {
 
           {/* Col 3: Institutional & Tenders (2 cols) */}
           <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-xs font-mono uppercase tracking-widest text-[#D4AF37]">
+            <h4 className="text-xs font-mono uppercase tracking-widest text-[#D8A56E] font-bold">
               Enterprise
             </h4>
-            <ul className="space-y-2 text-xs text-neutral-400">
+            <ul className="space-y-2 text-xs text-[#2A2A2A]/75 font-medium">
               <li>
-                <button onClick={onOpenTenders} className="hover:text-white transition-colors text-left">
+                <button onClick={onOpenTenders} className="hover:text-[#BD8750] transition-colors text-left">
                   Tenders &amp; NIT Notices
                 </button>
               </li>
               <li>
-                <button onClick={onOpenConsultation} className="hover:text-white transition-colors text-left">
+                <button onClick={onOpenConsultation} className="hover:text-[#BD8750] transition-colors text-left">
                   Enterprise Portal ↗
                 </button>
               </li>
               <li>
-                <a href="#services" className="hover:text-white transition-colors">
+                <a href="#services" className="hover:text-[#BD8750] transition-colors">
                   Schedule of Rates (DSR)
                 </a>
               </li>
               <li>
-                <a href="#contact" className="hover:text-white transition-colors">
+                <a href="#contact" className="hover:text-[#BD8750] transition-colors">
                   Quarry &amp; Material Audits
                 </a>
               </li>
@@ -132,10 +132,10 @@ export default function Footer({ onOpenTenders, onOpenConsultation }) {
 
           {/* Col 4: Newsletter & Monograph (3 cols) */}
           <div className="lg:col-span-3 space-y-4">
-            <h4 className="text-xs font-mono uppercase tracking-widest text-[#D4AF37]">
+            <h4 className="text-xs font-mono uppercase tracking-widest text-[#D8A56E] font-bold">
               Atelier Monograph
             </h4>
-            <p className="text-xs text-neutral-400 font-light leading-relaxed">
+            <p className="text-xs text-[#2A2A2A]/80 font-light leading-relaxed">
               Subscribe to receive our annual hardcover monograph on contemporary Indian minimalism and biophilic engineering.
             </p>
 
@@ -146,17 +146,17 @@ export default function Footer({ onOpenTenders, onOpenConsultation }) {
                 value={newsletterEmail}
                 onChange={(e) => setNewsletterEmail(e.target.value)}
                 placeholder="your.email@domain.com"
-                className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-xs text-white placeholder:text-neutral-600 focus:outline-none focus:border-[#D4AF37]"
+                className="w-full px-4 py-2.5 rounded-xl bg-[#E1DDD4] border border-[#2A2A2A]/15 text-xs text-[#2A2A2A] placeholder:text-[#2A2A2A]/40 focus:outline-none focus:border-[#D8A56E]"
               />
               <button
                 type="submit"
-                className="absolute right-1 top-1 bottom-1 px-3 rounded-lg bg-[#D4AF37] text-black text-xs font-bold hover:bg-[#c49f2e] transition-colors"
+                className="absolute right-1 top-1 bottom-1 px-3.5 rounded-lg bg-[#D8A56E] hover:bg-[#BD8750] text-[#2A2A2A] text-xs font-bold transition-colors shadow-sm"
               >
                 Join
               </button>
             </form>
             {subscribed && (
-              <span className="text-[11px] text-emerald-400 flex items-center space-x-1">
+              <span className="text-[11px] text-emerald-700 flex items-center space-x-1 font-semibold">
                 <Check className="w-3.5 h-3.5" />
                 <span>Subscribed to Monograph Edition.</span>
               </span>
@@ -165,7 +165,7 @@ export default function Footer({ onOpenTenders, onOpenConsultation }) {
         </div>
 
         {/* Bottom Sub-bar */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-neutral-500 gap-4">
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-[#2A2A2A]/60 gap-4">
           <div>
             &copy; {new Date().getFullYear()} Architecture Avenue Studio. All Rights Reserved. Designed for monumental living.
           </div>
@@ -177,7 +177,7 @@ export default function Footer({ onOpenTenders, onOpenConsultation }) {
               href="https://www.instagram.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-neutral-400 hover:text-white transition-colors"
+              className="text-[#2A2A2A]/70 hover:text-[#BD8750] transition-colors"
               aria-label="Instagram"
             >
               <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
@@ -190,7 +190,7 @@ export default function Footer({ onOpenTenders, onOpenConsultation }) {
               href="https://www.linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-neutral-400 hover:text-white transition-colors"
+              className="text-[#2A2A2A]/70 hover:text-[#BD8750] transition-colors"
               aria-label="LinkedIn"
             >
               <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
@@ -203,7 +203,7 @@ export default function Footer({ onOpenTenders, onOpenConsultation }) {
               href="https://www.behance.net"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-neutral-400 hover:text-white transition-colors text-xs font-bold"
+              className="text-[#2A2A2A]/70 hover:text-[#BD8750] transition-colors text-xs font-bold"
               aria-label="Behance"
             >
               Bē
@@ -214,17 +214,17 @@ export default function Footer({ onOpenTenders, onOpenConsultation }) {
               href="https://pinterest.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-neutral-400 hover:text-white transition-colors text-xs font-bold"
+              className="text-[#2A2A2A]/70 hover:text-[#BD8750] transition-colors text-xs font-bold"
               aria-label="Pinterest"
             >
               Pinterest
             </a>
 
-            <span className="w-px h-4 bg-white/10 mx-2" />
+            <span className="w-px h-4 bg-[#2A2A2A]/15 mx-2" />
 
             <button
               onClick={scrollToTop}
-              className="flex items-center space-x-1.5 text-neutral-400 hover:text-[#D4AF37] transition-colors"
+              className="flex items-center space-x-1.5 text-[#2A2A2A]/70 hover:text-[#BD8750] transition-colors font-medium"
             >
               <span>Back to Top</span>
               <ArrowUp className="w-3.5 h-3.5" />

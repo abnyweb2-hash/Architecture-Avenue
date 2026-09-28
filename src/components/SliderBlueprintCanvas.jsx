@@ -1,14 +1,14 @@
 import React, { useRef, useEffect } from 'react';
 
 /**
- * Golden Architectural Blueprint Component
+ * Structural Amber Architectural Blueprint Component
  * Renders the EXACT identical house as the right-hand photo,
- * transformed into a rich, deep, dark burnished gold CAD blueprint:
+ * transformed into a rich Warm Ochre / Structural Amber CAD blueprint (#D8A56E & #BD8750):
  *  - 100% identical size, position, scale, and perspective (1:1 alignment)
- *  - High-precision SVG Laplacian edge extraction in Deep Dark Gold (#B8860B / #C59B27)
- *  - Pure deep matte black background with zero hazy washout
- *  - Animated dark gold laser scan sweep & ambient gold particles
- *  - Technical architectural dimension callouts and elevation levels in deep gold
+ *  - High-precision SVG Laplacian edge extraction in Warm Ochre / Clay (#D8A56E)
+ *  - High-contrast matte background with zero haze
+ *  - Animated Warm Ochre laser scan sweep & ambient particles
+ *  - Technical architectural dimension callouts and elevation levels
  */
 export default function SliderBlueprintCanvas() {
   const overlayCanvasRef = useRef(null);
@@ -30,12 +30,12 @@ export default function SliderBlueprintCanvas() {
     };
     window.addEventListener('resize', onResize);
 
-    // Deep dark gold palette
-    const DARK_GOLD = 'rgba(184, 134, 11,';      // #B8860B DarkGoldenrod
-    const RICH_GOLD = 'rgba(196, 142, 22,';      // Rich deep amber gold
-    const ACCENT_GOLD = 'rgba(215, 155, 30,';    // Crisp dark gold highlight
+    // Unified Structural Amber Palette
+    const OCHRE = 'rgba(216, 165, 110,';       // #D8A56E Warm Ochre
+    const TERRACOTTA = 'rgba(189, 135, 80,';   // #BD8750 Deeper Terracotta
+    const HIGHLIGHT = 'rgba(235, 195, 150,';   // Ochre Light Highlight
 
-    // Floating gold micro-particles
+    // Floating micro-particles
     const particles = Array.from({ length: 25 }, () => ({
       x: Math.random(),
       y: Math.random(),
@@ -51,21 +51,21 @@ export default function SliderBlueprintCanvas() {
       time += 0.015;
       ctx.clearRect(0, 0, W, H);
 
-      // ── 1. Animated dark gold laser scan bar ──
+      // ── 1. Animated Warm Ochre laser scan bar ──
       scanPos += scanDir * 0.002;
       if (scanPos > 1) scanDir = -1;
       if (scanPos < 0) scanDir = 1;
 
       const scanX = scanPos * W;
       const scanGrd = ctx.createLinearGradient(scanX - 40, 0, scanX + 40, 0);
-      scanGrd.addColorStop(0, `${DARK_GOLD}0)`);
-      scanGrd.addColorStop(0.5, `${DARK_GOLD}0.15)`);
-      scanGrd.addColorStop(1, `${DARK_GOLD}0)`);
+      scanGrd.addColorStop(0, `${OCHRE}0)`);
+      scanGrd.addColorStop(0.5, `${OCHRE}0.18)`);
+      scanGrd.addColorStop(1, `${OCHRE}0)`);
       ctx.fillStyle = scanGrd;
       ctx.fillRect(scanX - 40, 0, 80, H);
 
-      // Center laser wire in deep gold
-      ctx.strokeStyle = `${ACCENT_GOLD}0.45)`;
+      // Center laser wire
+      ctx.strokeStyle = `${HIGHLIGHT}0.55)`;
       ctx.lineWidth = 1;
       ctx.setLineDash([5, 5]);
       ctx.beginPath();
@@ -74,7 +74,7 @@ export default function SliderBlueprintCanvas() {
       ctx.stroke();
       ctx.setLineDash([]);
 
-      // ── 2. Floating deep gold atmospheric particles ──
+      // ── 2. Floating Ochre atmospheric particles ──
       particles.forEach((p) => {
         p.y += p.vy;
         if (p.y < 0) p.y = 1;
@@ -83,7 +83,7 @@ export default function SliderBlueprintCanvas() {
         const pulse = 0.5 + 0.5 * Math.sin(time * 2 + p.x * 10);
         ctx.beginPath();
         ctx.arc(px, py, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `${DARK_GOLD}${p.alpha * pulse})`;
+        ctx.fillStyle = `${OCHRE}${p.alpha * pulse})`;
         ctx.fill();
       });
 
@@ -95,7 +95,7 @@ export default function SliderBlueprintCanvas() {
         [24, H - 24, 1, -1],
         [W - 24, H - 24, -1, -1],
       ];
-      ctx.strokeStyle = `${DARK_GOLD}0.6)`;
+      ctx.strokeStyle = `${OCHRE}0.65)`;
       ctx.lineWidth = 1.2;
       corners.forEach(([cx, cy, dx, dy]) => {
         ctx.beginPath();
@@ -105,13 +105,13 @@ export default function SliderBlueprintCanvas() {
         ctx.stroke();
       });
 
-      // ── 4. Technical Architectural Dimension Callouts (Deep Dark Gold) ──
+      // ── 4. Technical Architectural Dimension Callouts ──
       const topDimY = H * 0.12;
       const xStart = W * 0.15;
       const xMid = W * 0.44;
       const xEnd = W * 0.88;
 
-      ctx.strokeStyle = `${DARK_GOLD}0.5)`;
+      ctx.strokeStyle = `${OCHRE}0.5)`;
       ctx.lineWidth = 0.8;
       ctx.setLineDash([3, 3]);
 
@@ -124,7 +124,7 @@ export default function SliderBlueprintCanvas() {
       ctx.setLineDash([]);
 
       const drawArrow = (x, y, dir) => {
-        ctx.fillStyle = `${RICH_GOLD}0.8)`;
+        ctx.fillStyle = `${TERRACOTTA}0.85)`;
         ctx.beginPath();
         ctx.moveTo(x, y);
         ctx.lineTo(x + dir * 6, y - 3);
@@ -138,7 +138,7 @@ export default function SliderBlueprintCanvas() {
       drawArrow(xEnd, topDimY, -1);
 
       ctx.font = '9px "Space Grotesk", monospace';
-      ctx.fillStyle = `${ACCENT_GOLD}0.85)`;
+      ctx.fillStyle = `${HIGHLIGHT}0.90)`;
       ctx.textAlign = 'center';
       ctx.fillText('7.60m TOWER BLOCK', (xStart + xMid) / 2, topDimY - 4);
       ctx.fillText('12.40m LANAI PAVILION', (xMid + xEnd) / 2, topDimY - 4);
@@ -151,7 +151,7 @@ export default function SliderBlueprintCanvas() {
         { y: H * 0.78, text: '±0.00m TIMBER DECK' },
       ];
       levels.forEach(({ y, text }) => {
-        ctx.strokeStyle = `${DARK_GOLD}0.45)`;
+        ctx.strokeStyle = `${OCHRE}0.45)`;
         ctx.lineWidth = 0.8;
         ctx.setLineDash([2, 4]);
         ctx.beginPath();
@@ -160,7 +160,7 @@ export default function SliderBlueprintCanvas() {
         ctx.stroke();
         ctx.setLineDash([]);
 
-        ctx.fillStyle = `${ACCENT_GOLD}0.85)`;
+        ctx.fillStyle = `${HIGHLIGHT}0.90)`;
         ctx.font = '8.5px "Space Grotesk", monospace';
         ctx.textAlign = 'left';
         ctx.fillText(text, levelX + 28, y + 3);
@@ -174,7 +174,7 @@ export default function SliderBlueprintCanvas() {
       ];
       crosshairs.forEach(([cx, cy]) => {
         const pulse = 0.45 + 0.35 * Math.sin(time * 3 + cx);
-        ctx.strokeStyle = `${DARK_GOLD}${pulse})`;
+        ctx.strokeStyle = `${OCHRE}${pulse})`;
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.arc(cx, cy, 5, 0, Math.PI * 2);
@@ -186,10 +186,10 @@ export default function SliderBlueprintCanvas() {
       // Bottom CAD title bar
       ctx.textAlign = 'left';
       ctx.font = 'bold 9.5px "Space Grotesk", monospace';
-      ctx.fillStyle = `${ACCENT_GOLD}0.85)`;
-      ctx.fillText('AA-CAD // OBSIDIAN RESIDENCE // STRUCTURAL BLUEPRINT', 24, H - 28);
+      ctx.fillStyle = `${HIGHLIGHT}0.90)`;
+      ctx.fillText('AA-CAD // OBSIDIAN RESIDENCE // STRUCTURAL OCHRE BLUEPRINT', 24, H - 28);
       ctx.font = '8px "Space Grotesk", monospace';
-      ctx.fillStyle = `${DARK_GOLD}0.65)`;
+      ctx.fillStyle = `${OCHRE}0.70)`;
       ctx.fillText('SCALE 1:50 · LOD-400 BIM · 3D ORTHOGRAPHIC PROJECTION', 24, H - 16);
 
       raf = requestAnimationFrame(render);
@@ -205,7 +205,7 @@ export default function SliderBlueprintCanvas() {
 
   return (
     <div className="relative w-full h-full bg-[#070707] overflow-hidden select-none">
-      {/* ── 1. SVG Filter Definition for Rich Dark Golden Blueprint ── */}
+      {/* ── 1. SVG Filter Definition for Structural Warm Ochre (#D8A56E) Blueprint ── */}
       <svg className="absolute w-0 h-0 pointer-events-none" aria-hidden="true">
         <defs>
           <filter id="golden-blueprint-edges" colorInterpolationFilters="sRGB">
@@ -236,39 +236,39 @@ export default function SliderBlueprintCanvas() {
               <feFuncG type="linear" slope="4.8" intercept="-0.16" />
               <feFuncB type="linear" slope="4.8" intercept="-0.16" />
             </feComponentTransfer>
-            {/* Deep Dark Gold Color Matrix: Rich Amber / Dark Antique Gold (R: 196, G: 138, B: 18) */}
+            {/* Warm Ochre Color Matrix: #D8A56E (R: 216/255=0.847, G: 165/255=0.647, B: 110/255=0.431) */}
             <feColorMatrix
               type="matrix"
               in="brightEdges"
               values="
-                0.768 0 0 0 0
-                0.541 0 0 0 0
-                0.070 0 0 0 0
+                0.847 0 0 0 0
+                0.647 0 0 0 0
+                0.431 0 0 0 0
                 0     0 0 1 0"
-              result="darkGoldLines"
+              result="ochreLines"
             />
-            {/* Subtle warm amber glow */}
-            <feGaussianBlur in="darkGoldLines" stdDeviation="1.0" result="warmGlow" />
+            {/* Subtle warm amber/terracotta glow */}
+            <feGaussianBlur in="ochreLines" stdDeviation="1.0" result="warmGlow" />
             <feMerge>
               <feMergeNode in="warmGlow" />
-              <feMergeNode in="darkGoldLines" />
+              <feMergeNode in="ochreLines" />
             </feMerge>
           </filter>
         </defs>
       </svg>
 
-      {/* ── 2. Subtle Dark Base (Very low opacity to preserve solid pitch-black background) ── */}
+      {/* ── 2. Subtle Dark Base ── */}
       <img
         src="/comparison-house.jpg"
         alt="Architectural Blueprint Base"
         className="absolute inset-0 w-full h-full object-cover filter invert contrast-250 brightness-[0.08] sepia saturate-[400%] hue-rotate-[340deg]"
-        style={{ opacity: 0.25 }}
+        style={{ opacity: 0.20 }}
       />
 
-      {/* ── 3. High-Precision Deep Dark Golden Wireframe Contours (100% Identical House Image) ── */}
+      {/* ── 3. High-Precision Structural Ochre Wireframe Contours ── */}
       <img
         src="/comparison-house.jpg"
-        alt="Dark Golden CAD Architectural Wireframe"
+        alt="Warm Ochre CAD Architectural Wireframe"
         className="absolute inset-0 w-full h-full object-cover"
         style={{
           filter: 'url(#golden-blueprint-edges)',
@@ -276,19 +276,19 @@ export default function SliderBlueprintCanvas() {
         }}
       />
 
-      {/* ── 4. Technical Architectural Dark Gold CAD Grid ── */}
+      {/* ── 4. Technical Architectural Warm Ochre CAD Grid ── */}
       <div
         className="absolute inset-0 pointer-events-none opacity-30"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(184, 134, 11, 0.09) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(184, 134, 11, 0.09) 1px, transparent 1px)
+            linear-gradient(to right, rgba(216, 165, 110, 0.10) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(216, 165, 110, 0.10) 1px, transparent 1px)
           `,
           backgroundSize: '32px 32px',
         }}
       />
 
-      {/* ── 5. Subtle Vignette to Frame the Dark Gold Blueprint ── */}
+      {/* ── 5. Subtle Vignette to Frame the Blueprint ── */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
