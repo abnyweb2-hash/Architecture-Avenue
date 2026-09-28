@@ -14,31 +14,12 @@ export default function Footer({ onOpenTenders, onOpenConsultation }) {
           
           {/* Column 1: Brand & CoA Credentials */}
           <div className="space-y-4">
-            <a href="#home" className="flex items-center space-x-3.5 group cursor-pointer">
-              {/* Monogram Box [A|A] */}
-              <div className="w-9 h-9 border border-[#D8A56E]/40 rounded-lg flex items-center justify-center bg-white/5 group-hover:border-[#D8A56E] transition-all duration-300">
-                <svg
-                  viewBox="0 0 40 40"
-                  className="w-5 h-5 text-white group-hover:text-[#D8A56E] transition-colors"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                >
-                  <path d="M12 28 L18 12 L24 28" />
-                  <path d="M14 23 L22 23" />
-                  <line x1="20" y1="10" x2="20" y2="30" stroke="#D8A56E" strokeOpacity="0.8" strokeDasharray="2 2" />
-                  <rect x="2" y="2" width="36" height="36" rx="2" stroke="#D8A56E" strokeWidth="1.2" strokeOpacity="0.4" />
-                </svg>
-              </div>
-
-              <div className="flex flex-col text-left">
-                <span className="font-monumental tracking-[0.22em] text-white text-sm sm:text-base font-bold uppercase">
-                  ARCHITECT&apos;S
-                </span>
-                <span className="text-[10px] tracking-[0.35em] text-[#D8A56E] font-bold uppercase">
-                  AVENUE
-                </span>
-              </div>
+            <a href="#home" className="inline-block group cursor-pointer">
+              <img
+                src="/logo.png"
+                alt="Architect's Avenue"
+                className="h-10 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+              />
             </a>
 
             <p className="text-xs text-neutral-400 font-light leading-relaxed">
