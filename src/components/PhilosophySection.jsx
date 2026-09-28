@@ -47,9 +47,12 @@ export default function PhilosophySection({ onOpenConsultation }) {
           <div className="lg:col-span-5 relative">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-black/40 group border border-white/10">
               <img
-                src="https://images.unsplash.com/photo-1600585526-990dced4db0d?auto=format&fit=crop&w=1200&q=85"
+                src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=85"
                 alt="Architecture Avenue Design Philosophy"
                 className="w-full h-[520px] sm:h-[620px] object-cover transition-transform duration-700 group-hover:scale-105"
+                onError={(e) => {
+                  e.currentTarget.src = "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=85";
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D]/90 via-[#0D0D0D]/30 to-transparent" />
 
